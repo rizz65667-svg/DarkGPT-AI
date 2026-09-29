@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, interactive-widget=resizes-content">
+    <title>DarkGPT AI Supreme Ultra Edition - Quantum Matrix v11.0</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkred: { 50: '#fdf2f2', 100: '#fde8e8', 500: '#ef4444', 600: '#dc2626', 700: '#b91c1c', 800: '#991b1b', 900: '#7f1d1d', 950: '#450a0a' },
+                        cyber: { bg: '#010101', card: '#050505', border: '#1f0303', glow: '#ef4444' }
+                    },
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'], mono: ['"JetBrains Mono"', 'monospace'] }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #010101; color: #f3f4f6; overflow-x: hidden; touch-action: manipulation; }
+        
+        /* Quantum Glass & Glow Effects */
+        .cyber-glass { background: rgba(4, 4, 4, 0.96); border: 1px solid rgba(239, 68, 68, 0.32); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.85); }
+        .cyber-glass-card { background: rgba(8, 8, 8, 0.92); border: 1px solid rgba(239, 68, 68, 0.2); }
+        .red-glow { box-shadow: 0 0 40px rgba(239, 68, 68, 0.4); }
+        .red-glow-strong { box-shadow: 0 0 65px rgba(239, 68, 68, 0.75); }
+        .red-text-glow { text-shadow: 0 0 18px rgba(239, 68, 68, 0.9); }
+        
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: #010101; }
+        ::-webkit-scrollbar-thumb { background: #b91c1c; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ef4444; }
+
+        /* Dynamic Matrix Background */
+        .matrix-grid { background-image: radial-gradient(rgba(239, 68, 68, 0.08) 1.5px, transparent 1.5px); background-size: 28px 28px; }
+
+        html, body { width: 100%; height: 100%; overflow: hidden; }
+        body { height: var(--app-height, 100dvh) !important; }
+        
+        /* Code blocks styling */
+        .chat-message pre { background: #030303 !important; border: 1px solid #991b1b; border-radius: 0.9rem; padding: 0.85rem; margin: 0.7rem 0; overflow-x: auto; box-shadow: inset 0 0 15px rgba(239, 68, 68, 0.05); }
+        .chat-message code { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #fca5a5; }
+
+        body::before { content:''; position:fixed; inset:0; pointer-events:none; z-index:-2; background: radial-gradient(900px 400px at 50% -10%, rgba(239,68,68,0.22), transparent 70%); }
+        
+        header.cyber-glass::after { content:''; position:absolute; left:0; right:0; bottom:-1px; height:1.5px; background:linear-gradient(90deg, transparent, #ef4444, #ff8a8a, #ef4444, transparent); background-size:200% 100%; animation: sweepLine 5s linear infinite; opacity:.9; }
+        @keyframes sweepLine { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+        .input-shell:focus-within { box-shadow: 0 0 0 1.5px rgba(239,68,68,0.7), 0 0 35px rgba(239,68,68,0.35); }
+        
+        .quick-prompt-card { transition: transform .25s, box-shadow .25s, border-color .25s; }
+        .quick-prompt-card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 12px 35px rgba(239,68,68,0.28); border-color: rgba(239,68,68,0.8); }
+        .quick-prompt-card:active { transform: scale(0.97); }
+
+        @keyframes fadeIn { from { opacity:0; transform: translateY(10px) scale(0.98); } to { opacity:1; transform:none; } }
+        .animate-fadeIn { animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        .code-head { display:flex; align-items:center; justify-content:space-between; padding:0.4rem 0.85rem; margin-top:0.7rem; background:#180404; border:1px solid #991b1b; border-bottom:0; border-radius:0.9rem 0.9rem 0 0; font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:#fca5a5; }
+        .code-head button { padding:0.25rem 0.6rem; border-radius:0.5rem; background:#5a0b0b; border:1px solid #991b1b; color:#fca5a5; cursor:pointer; font-size:0.7rem; transition: all 0.2s; }
+        .code-head button:hover { background:#dc2626; color:#fff; box-shadow: 0 0 10px rgba(239,68,68,0.5); }
+        
+        .chat-message .code-block pre { margin:0; border-radius:0 0 0.9rem 0.9rem; border-top:0; }
+        .md-h { font-weight:700; color:#fff; margin:0.7rem 0 0.3rem; }
+        .md-li { display:flex; gap:0.5rem; margin:0.2rem 0; }
+        .md-li span:first-child { color:#ef4444; flex-shrink:0; font-weight: bold; }
+        .chat-message code.inline-code { background:rgba(153, 27, 27, 0.45); padding:0.15rem 0.4rem; border-radius:0.4rem; border:1px solid rgba(185, 28, 28, 0.6); font-size:0.82em; color: #fecaca; }
+        .chat-message strong { color:#fff; font-weight: 700; } 
+        .chat-message em { color:#fca5a5; }
+
+        /* Background Animated Drift */
+        body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:-3; background: radial-gradient(600px 500px at 15% 85%, rgba(239,68,68,0.15), transparent 70%), radial-gradient(550px 450px at 88% 25%, rgba(153,27,27,0.18), transparent 70%); }
+        @keyframes drift { to { transform: translate3d(5%, -4%, 0) scale(1.12); } }
+
+        .title-shine { background-image: linear-gradient(90deg,#7f1d1d,#ef4444,#fca5a5,#ef4444,#7f1d1d) !important; background-size: 250% 100%; animation: shine 4s linear infinite; }
+        @keyframes shine { to { background-position: 250% 0; } }
+
+        .input-shell { border: 1px solid transparent !important; background: linear-gradient(#050505,#050505) padding-box, linear-gradient(130deg,#450a0a,#ef4444,#ff8a8a,#ef4444,#450a0a) border-box !important; background-size: 100% 100%, 300% 100%; }
+        @keyframes borderFlow { to { background-position: 0 0, 300% 0; } }
+
+        #send-btn { animation: sendPulse 2s infinite ease-in-out; transition: transform 0.15s, background-color 0.2s; }
+        #send-btn:active { transform: scale(0.88); }
+        @keyframes sendPulse { 0%,100% { box-shadow: 0 0 15px rgba(239,68,68,0.5); } 50% { box-shadow: 0 0 32px rgba(239,68,68,0.9); } }
+
+        #welcome-banner .red-glow-strong { position: relative; }
+        #welcome-banner .red-glow-strong::before { content:''; position:absolute; inset:-10px; border-radius:32px; background: conic-gradient(from 0deg, transparent 0 60%, #ef4444 100%); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px)); mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px)); animation: spinRing 3s linear infinite; }
+        @keyframes spinRing { to { transform: rotate(360deg); } }
+
+        #canvas-particles { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
+        
+        .chat-message .cyber-glass { box-shadow: 0 4px 30px rgba(239, 68, 68, 0.08), inset 0 1px 0 rgba(239, 68, 68, 0.15); }
+        
+        .tw-cursor { display:inline-block; width:8px; height:1.1em; margin-left:3px; vertical-align:-2px; background:#ef4444; box-shadow:0 0 10px #ef4444; animation: blinkCursor 0.7s steps(2) infinite; }
+        @keyframes blinkCursor { 50% { opacity: 0; } }
+
+        /* Ultra Splash Screen */
+        #splash { position:fixed; inset:0; z-index:100; display:flex; flex-direction:column; align-items:center; justify-content:center; background-color:#000; background-image: radial-gradient(700px 500px at 50% 40%, rgba(153,27,27,0.55), transparent 75%); overflow:hidden; transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1); clip-path: circle(160% at 50% 45%); }
+        #splash.hide { clip-path: circle(0% at 50% 45%); pointer-events:none; }
+        #splash.hide > * { opacity:0; transition: opacity 0.3s; }
+        
+        .sp-orb { position:relative; width:104px; height:104px; border-radius:30px; display:flex; align-items:center; justify-content:center; background: linear-gradient(135deg,#dc2626,#991b1b 60%,#450a0a); box-shadow:0 0 60px rgba(239,68,68,0.7); animation: pulseGlow 2s ease-in-out infinite; }
+        .sp-orb i { position:relative; z-index:1; font-size:2.8rem; color:#fee2e2; filter: drop-shadow(0 0 10px rgba(255,255,255,0.6)); }
+        
+        .sp-title { position:relative; margin-top:52px; font-weight:800; font-size:2.1rem; letter-spacing:0.16em; background: linear-gradient(90deg,#7f1d1d,#ef4444,#fca5a5,#ef4444,#7f1d1d); background-size:250% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation: titleIn 1.2s ease-out both, shine 3s linear infinite; filter: drop-shadow(0 0 16px rgba(239,68,68,0.7)); }
+        @keyframes titleIn { from { opacity:0; letter-spacing:0.6em; transform: translateY(14px); } to { opacity:1; letter-spacing:0.16em; transform:none; } }
+        
+        .sp-bar { position:relative; margin-top:36px; width:min(280px,75vw); height:5px; border-radius:5px; background:#180404; overflow:hidden; box-shadow:0 0 0 1px rgba(153,27,27,0.6), inset 0 0 8px rgba(0,0,0,0.8); }
+        .sp-fill { height:100%; width:0; border-radius:5px; background: linear-gradient(90deg,#7f1d1d,#ef4444,#ff8a8a); box-shadow:0 0 18px #ef4444; transition: width 0.08s linear; }
+    </style>
+</head>
+<body class="flex flex-col relative matrix-grid selection:bg-red-600 selection:text-white">
+
+    <!-- SPLASH SCREEN ULTRA -->
+    <div id="splash">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(239,68,68,0.15),transparent_70%)]"></div>
+        <div class="sp-orb">
+            <div class="absolute inset-0 rounded-3xl border-2 border-red-500 animate-ping opacity-30"></div>
+            <i class="fa-solid fa-brain"></i>
+        </div>
+        <div class="sp-title">DARKGPT AI</div>
+        <div class="text-xs font-mono tracking-[0.4em] text-red-400 mt-2">SUPREME ULTRA v11.0</div>
+        <div class="sp-bar"><div class="sp-fill"></div></div>
+        <div class="flex justify-between w-[min(280px,75vw)] mt-3 font-mono text-[11px] text-red-400/80">
+            <span id="sp-text">Memuat kuantum inti...</span>
+            <span id="sp-pct">0%</span>
+        </div>
+    </div>
+
+    <!-- CANVAS PARTIKEL LATAR BELAKANG -->
+    <canvas id="canvas-particles"></canvas>
+
+    <!-- HEADER SUPREME ULTRA -->
+    <header class="cyber-glass sticky top-0 z-40 px-3 py-2.5 md:px-5 md:py-3.5 flex items-center justify-between border-b border-red-950 shadow-2xl">
+        <div class="flex items-center space-x-3">
+            <button id="sidebar-toggle-btn" class="md:hidden w-9 h-9 flex items-center justify-center text-red-400 rounded-xl bg-red-950/50 border border-red-900/60 cursor-pointer hover:bg-red-900/50 transition">
+                <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+            <div class="flex items-center space-x-3">
+                <div class="relative flex items-center justify-center w-10 h-10 rounded-2xl bg-gradient-to-br from-red-600 via-red-800 to-red-950 text-white red-glow">
+                    <i class="fa-solid fa-brain text-xl text-red-100"></i>
+                    <span class="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500"></span>
+                    </span>
+                </div>
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <h1 class="title-shine font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-200 to-red-300 text-sm md:text-lg tracking-wider red-text-glow whitespace-nowrap">
+                            DARKGPT <span class="text-red-500 font-black underline decoration-red-600 decoration-2">AI</span>
+                        </h1>
+                        <span class="hidden sm:inline-block text-[9px] uppercase font-mono px-2 py-0.5 rounded-md bg-red-950 border border-red-600/80 text-red-300 font-bold tracking-wider">ULTRA</span>
+                    </div>
+                    <p class="hidden sm:block text-[9px] text-red-400/80 font-mono tracking-widest uppercase">Quantum Matrix Engine v11.0</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="hidden lg:flex items-center space-x-2.5 bg-black/90 border border-red-900/60 px-3.5 py-1.5 rounded-xl shadow-inner">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+            <span id="active-model-display" class="text-xs font-mono text-red-300">Groq: llama-3.3-70b-versatile</span>
+        </div>
+
+        <div class="flex items-center space-x-2">
+            <button id="settings-modal-btn" title="Pengaturan Sistem AI" class="w-9 h-9 flex items-center justify-center rounded-xl bg-red-950/40 hover:bg-red-900/60 border border-red-900/60 text-red-400 hover:text-red-200 transition cursor-pointer">
+                <i class="fa-solid fa-sliders text-base"></i>
+            </button>
+            <button id="new-chat-btn" title="Percakapan Baru" class="w-9 h-9 flex items-center justify-center rounded-xl bg-red-950/40 hover:bg-red-900/60 border border-red-900/60 text-red-400 hover:text-red-200 transition cursor-pointer">
+                <i class="fa-solid fa-plus text-base"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="flex-1 flex relative overflow-hidden">
+        
+        <!-- SIDEBAR -->
+        <aside id="sidebar" class="absolute md:relative inset-y-0 left-0 z-30 w-70 md:w-72 cyber-glass border-r border-red-950 flex flex-col transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out shadow-2xl">
+            <div class="p-4 border-b border-red-950/90 flex items-center justify-between">
+                <h2 class="text-xs font-mono uppercase tracking-wider text-red-400 font-bold flex items-center space-x-2">
+                    <i class="fa-solid fa-terminal text-red-500"></i>
+                    <span>Arsip Percakapan</span>
+                </h2>
+                <button id="sidebar-close-btn" class="md:hidden text-red-400 hover:text-white cursor-pointer p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div class="p-3 border-b border-red-950/60">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-red-500"></i>
+                    <input type="text" id="history-search" placeholder="Cari arsip chat..." class="w-full bg-black/90 border border-red-900/70 rounded-xl pl-8 pr-3 py-2 text-xs text-red-200 placeholder-red-700/70 focus:outline-none focus:border-red-500 transition shadow-inner">
+                </div>
+            </div>
+
+            <div id="history-list" class="flex-1 overflow-y-auto p-3 space-y-1.5"></div>
+
+            <div class="p-3 border-t border-red-950 bg-black/70 flex items-center justify-between">
+                <button id="backup-chats-btn" class="text-xs text-red-300 hover:text-white flex items-center space-x-1.5 px-3 py-2 rounded-xl bg-red-950/50 border border-red-900/40 transition cursor-pointer font-mono">
+                    <i class="fa-solid fa-download text-red-500"></i>
+                    <span>Ekspor</span>
+                </button>
+                <button id="delete-all-history-btn" class="text-xs text-red-300 hover:text-white flex items-center space-x-1.5 px-3 py-2 rounded-xl bg-red-950/50 border border-red-900/40 hover:border-red-600 transition cursor-pointer font-mono">
+                    <i class="fa-solid fa-trash-can text-red-500"></i>
+                    <span>Hapus Semua</span>
+                </button>
+            </div>
+        </aside>
+
+        <div id="sidebar-backdrop" class="fixed inset-0 bg-black/80 z-20 hidden md:hidden"></div>
+
+        <!-- MAIN CHAT AREA -->
+        <main class="flex-1 flex flex-col relative bg-gradient-to-b from-[#020202] via-[#050101] to-[#020202] overflow-hidden">
+            
+            <div class="px-3 py-2 bg-black/80 border-b border-red-950/80 flex items-center justify-between text-xs overflow-x-auto whitespace-nowrap">
+                <div class="flex items-center space-x-2 flex-1 min-w-0">
+                    <span class="text-red-500 font-mono font-bold flex items-center"><i class="fa-solid fa-wand-magic-sparkles mr-1.5 text-red-400"></i><span class="hidden sm:inline ml-1">Persona:</span></span>
+                    <select id="persona-select" class="flex-1 min-w-0 bg-red-950/60 border border-red-900/70 text-red-200 rounded-xl px-3 py-1.5 text-xs focus:outline-none focus:border-red-500 font-mono cursor-pointer shadow-inner">
+                        <option value="normal">DarkGPT Supreme Ultra</option>
+                        <option value="coding">Elite Fullstack Coding AI</option>
+                        <option value="roblox">Roblox Advanced Lua Master AI</option>
+                        <option value="hacker">CyberSecurity & Pentest Expert AI</option>
+                    </select>
+                </div>
+                <div class="hidden sm:flex items-center space-x-4 text-[11px] font-mono text-red-400/80 pl-2">
+                    <span id="token-counter"><i class="fa-solid fa-coins mr-1 text-red-500"></i> Tokens: ~0</span>
+                    <span id="latency-display"><i class="fa-solid fa-bolt mr-1 text-red-500"></i> Latency: 0ms</span>
+                </div>
+            </div>
+
+            <div id="chat-container" class="p-3 md:p-6 space-y-3 md:space-y-4 max-w-4xl w-full mx-auto overflow-y-auto flex-1">
+                <!-- Welcome Screen -->
+                <div id="welcome-banner" class="text-center py-6 md:py-12 px-2 my-auto animate-fadeIn">
+                    <div class="inline-flex items-center justify-center w-20 h-20 md:w-26 md:h-26 rounded-3xl bg-gradient-to-br from-red-600 via-red-800 to-red-950 text-white red-glow-strong mb-5 md:mb-7 animate-pulse">
+                        <i class="fa-solid fa-microchip text-4xl md:text-5xl text-red-100"></i>
+                    </div>
+                    <h2 class="text-2xl md:text-4xl font-extrabold text-white mb-2.5 red-text-glow tracking-wide">DARKGPT <span class="text-red-500">AI</span> ULTRA</h2>
+                    <p class="text-red-400/90 text-xs md:text-sm max-w-lg mx-auto mb-6 md:mb-8 font-mono leading-relaxed">Platform kecerdasan buatan kuantum tingkat lanjut dengan animasi matriks mutakhir, performa instan, dan enkripsi tingkat tinggi.</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 max-w-xl mx-auto text-left">
+                        <div class="quick-prompt-card p-3.5 md:p-4 rounded-2xl cyber-glass-card hover:border-red-600 cursor-pointer transition shadow-xl group" data-prompt="Buatkan skrip Roblox Lua Rayfield UI lengkap untuk sistem ESP dan Noclip tanpa key system!">
+                            <div class="text-red-400 font-bold text-xs mb-1 group-hover:text-red-300 flex items-center"><i class="fa-solid fa-gamepad mr-1.5"></i> Roblox Lua AI</div>
+                            <p class="text-[11px] text-gray-400 leading-snug">Skrip game otomatis & elegan.</p>
+                        </div>
+                        <div class="quick-prompt-card p-3.5 md:p-4 rounded-2xl cyber-glass-card hover:border-red-600 cursor-pointer transition shadow-xl group" data-prompt="Tulis kode lengkap aplikasi web interaktif bertema cyberpunk merah hitam menggunakan Tailwind CSS.">
+                            <div class="text-red-400 font-bold text-xs mb-1 group-hover:text-red-300 flex items-center"><i class="fa-solid fa-code mr-1.5"></i> Web App AI</div>
+                            <p class="text-[11px] text-gray-400 leading-snug">Pembuatan kode web instan.</p>
+                        </div>
+                        <div class="quick-prompt-card p-3.5 md:p-4 rounded-2xl cyber-glass-card hover:border-red-600 cursor-pointer transition shadow-xl group" data-prompt="Jelaskan teknik optimasi performa sistem Android dan konfigurasi kernel tingkat lanjut.">
+                            <div class="text-red-400 font-bold text-xs mb-1 group-hover:text-red-300 flex items-center"><i class="fa-solid fa-mobile-screen mr-1.5"></i> Android Tweaks</div>
+                            <p class="text-[11px] text-gray-400 leading-snug">Modifikasi sistem & optimasi perangkat.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="typing-indicator" class="hidden px-6 py-2 max-w-4xl w-full mx-auto animate-fadeIn">
+                <div class="flex items-center space-x-2 text-red-500 font-mono text-xs cyber-glass px-4 py-2.5 rounded-2xl w-fit border border-red-900/80 shadow-xl">
+                    <div class="w-2 h-2 rounded-full bg-red-500 animate-bounce"></div>
+                    <div class="w-2 h-2 rounded-full bg-red-500 animate-bounce [animation-delay:0.2s]"></div>
+                    <div class="w-2 h-2 rounded-full bg-red-500 animate-bounce [animation-delay:0.4s]"></div>
+                    <span class="ml-2 font-bold tracking-wider text-red-300">DarkGPT AI sedang memproses matriks...</span>
+                </div>
+            </div>
+
+            <div id="attachment-preview-container" class="hidden px-6 py-2 max-w-4xl w-full mx-auto flex items-center space-x-3"></div>
+
+            <button id="scroll-bottom-btn" title="Ke pesan terbaru" class="hidden absolute bottom-20 right-4 z-20 w-10 h-10 rounded-full cyber-glass text-red-400 hover:text-white red-glow flex items-center justify-center cursor-pointer transition hover:scale-110"><i class="fa-solid fa-chevron-down text-sm"></i></button>
+            
+            <!-- INPUT BAR ULTRA -->
+            <div class="p-3 md:p-4 cyber-glass border-t border-red-950/90 shadow-2xl">
+                <div class="max-w-4xl mx-auto flex flex-col space-y-2">
+                    <div class="input-shell relative flex items-end bg-black/95 border border-red-900/80 rounded-2xl focus-within:border-red-500 transition shadow-inner">
+                        <div class="p-2 md:p-3 flex items-center space-x-1">
+                            <input type="file" id="file-input" class="hidden" accept="image/*,.txt,.js,.py,.lua,.html,.json">
+                            <button id="attach-file-btn" title="Lampirkan Berkas" class="p-2 rounded-xl text-red-400 hover:text-white hover:bg-red-950/60 transition cursor-pointer">
+                                <i class="fa-solid fa-paperclip text-lg"></i>
+                            </button>
+                            <button id="mic-btn" title="Perintah Suara" class="p-2 rounded-xl text-red-400 hover:text-white hover:bg-red-950/60 transition cursor-pointer">
+                                <i class="fa-solid fa-microphone text-lg"></i>
+                            </button>
+                        </div>
+
+                        <textarea id="chat-input" rows="1" placeholder="Ketik pesan di sini..." class="flex-1 bg-transparent text-red-100 placeholder-red-700/60 px-1 py-3 focus:outline-none resize-none text-sm max-h-36 font-sans"></textarea>
+
+                        <div class="p-2 md:p-3">
+                            <button id="send-btn" class="p-3 rounded-xl bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 text-white red-glow transition flex items-center justify-center cursor-pointer shadow-lg">
+                                <i class="fa-solid fa-paper-plane text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- SETTINGS MODAL -->
+    <div id="settings-modal" class="fixed inset-0 bg-black/85 z-50 flex items-center justify-center hidden p-4 animate-fadeIn">
+        <div class="cyber-glass rounded-3xl max-w-lg w-full p-5 md:p-8 border border-red-800/80 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-6 pb-3 border-b border-red-950">
+                <h3 class="text-lg font-bold text-white flex items-center space-x-2.5">
+                    <i class="fa-solid fa-sliders text-red-500 text-xl"></i>
+                    <span>Konfigurasi API & Sistem Ultra</span>
+                </h3>
+                <button id="settings-modal-close-btn" class="text-red-400 hover:text-white text-xl cursor-pointer p-1">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-mono uppercase text-red-400 mb-1.5 font-bold">Pilih Penyedia AI</label>
+                    <select id="setting-provider" class="w-full bg-black/90 border border-red-900 rounded-xl px-3.5 py-2.5 text-sm text-red-200 focus:outline-none focus:border-red-500 font-mono cursor-pointer shadow-inner">
+                        <option value="groq">Groq AI (Super Cepat)</option>
+                        <option value="gemini">Google Gemini AI API</option>
+                        <option value="mistral">Mistral AI</option>
+                        <option value="openrouter">OpenRouter AI</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono uppercase text-red-400 mb-1.5 font-bold">Pilih Model AI</label>
+                    <select id="setting-model" class="w-full bg-black/90 border border-red-900 rounded-xl px-3.5 py-2.5 text-sm text-red-200 focus:outline-none focus:border-red-500 font-mono cursor-pointer shadow-inner"></select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono uppercase text-red-400 mb-1.5 font-bold" id="api-key-label">API Key Groq</label>
+                    <input type="password" id="setting-apikey" placeholder="Masukkan API Key Anda..." class="w-full bg-black/90 border border-red-900 rounded-xl px-3.5 py-2.5 text-sm text-red-200 placeholder-red-900 focus:outline-none focus:border-red-500 font-mono shadow-inner">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono uppercase text-red-400 mb-1.5 font-bold">System Prompt AI</label>
+                    <textarea id="setting-system-prompt" rows="3" class="w-full bg-black/90 border border-red-900 rounded-xl px-3.5 py-2.5 text-xs text-red-200 focus:outline-none focus:border-red-500 font-mono shadow-inner"></textarea>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-mono uppercase text-red-400 mb-1.5 font-bold">Temperatur (<span id="temp-val">0.7</span>)</label>
+                        <input type="range" id="setting-temp" min="0" max="2" step="0.1" value="0.7" class="w-full accent-red-600 cursor-pointer">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono uppercase text-red-400 mb-1.5 font-bold">Maksimal Token</label>
+                        <input type="number" id="setting-maxtokens" value="4096" class="w-full bg-black/90 border border-red-900 rounded-xl px-3.5 py-2.5 text-sm text-red-200 focus:outline-none focus:border-red-500 font-mono shadow-inner">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 flex justify-end space-x-3">
+                <button id="settings-cancel-btn" class="px-5 py-2.5 rounded-xl bg-red-950/40 hover:bg-red-900/60 border border-red-900/50 text-red-300 text-xs font-semibold transition cursor-pointer font-mono">Batal</button>
+                <button id="settings-save-btn" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 text-white text-xs font-bold red-glow transition cursor-pointer font-mono shadow-lg">Simpan Pengaturan</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let appState = {
+            provider: 'groq',
+            model: 'llama-3.3-70b-versatile',
+            apiKey: '',
+            systemPrompt: 'Anda adalah DarkGPT AI Supreme Ultra, asisten kecerdasan buatan tingkat lanjut dengan estetika cyberpunk merah hitam. Berikan jawaban yang sangat akurat, bersih, dan profesional.',
+            temperature: 0.7,
+            maxTokens: 4096,
+            persona: 'normal'
+        };
+
+        const MODEL_OPTIONS = {
+            groq: [
+                { id: 'llama-3.3-70b-versatile', name: 'Llama 3.3 70B Versatile' },
+                { id: 'llama-3.1-8b-instant', name: 'Llama 3.1 8B Instant' },
+                { id: 'mixtral-8x7b-32768', name: 'Mixtral 8x7b Instruct' }
+            ],
+            gemini: [
+                { id: 'gemini-1.5-flash', name: 'Gemini 1.5 Flash' },
+                { id: 'gemini-1.5-pro', name: 'Gemini 1.5 Pro' }
+            ],
+            mistral: [
+                { id: 'codestral-latest', name: 'Codestral Latest' },
+                { id: 'mistral-small-latest', name: 'Mistral Small' }
+            ],
+            openrouter: [
+                { id: 'anthropic/claude-3.5-sonnet', name: 'Claude 3.5 Sonnet' },
+                { id: 'meta-llama/llama-3.3-70b-instruct:free', name: 'Llama 3.3 70B Free' }
+            ]
+        };
+
+        const PERSONA_PROMPTS = {
+            normal: 'Anda adalah DarkGPT AI Supreme Ultra, asisten kecerdasan buatan serba bisa yang cerdas.',
+            coding: 'Anda adalah Elite Fullstack Coding AI. Berikan kode pemrograman terbaik dan teroptimasi.',
+            roblox: 'Anda adalah Roblox Advanced Lua Master AI. Ahli dalam membuat skrip exploit, Rayfield UI, ESP, Aimlock, dan sistem game.',
+            hacker: 'Anda adalah CyberSecurity & Pentest Expert AI. Berikan analisis keamanan sistem secara mendalam.',
+        };
+
+        let currentChatId = null;
+        let chatHistory = [];
+        let messages = [];
+        let currentAttachment = null;
+        let WELCOME_HTML = '';
+        let sending = false;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initSplash();
+            WELCOME_HTML = document.getElementById('welcome-banner').outerHTML;
+            loadSettingsFromStorage();
+            loadChatHistoryFromStorage();
+            if (chatHistory.length > 0) {
+                loadChat(chatHistory[0].id);
+            } else {
+                createNewChat();
+            }
+            updateModelDropdown();
+            initEventListeners();
+            initViewportFix();
+            initParticlesCanvas();
+            initRotatingPlaceholder();
+
+            const textarea = document.getElementById('chat-input');
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+            });
+        });
+
+        function initEventListeners() {
+            document.getElementById('sidebar-toggle-btn').addEventListener('click', toggleSidebar);
+            document.getElementById('sidebar-close-btn').addEventListener('click', toggleSidebar);
+            document.getElementById('sidebar-backdrop').addEventListener('click', toggleSidebar);
+            
+            document.getElementById('settings-modal-btn').addEventListener('click', openSettingsModal);
+            document.getElementById('settings-modal-close-btn').addEventListener('click', closeSettingsModal);
+            document.getElementById('settings-cancel-btn').addEventListener('click', closeSettingsModal);
+            document.getElementById('settings-save-btn').addEventListener('click', saveSettings);
+
+            document.getElementById('new-chat-btn').addEventListener('click', createNewChat);
+            document.getElementById('attach-file-btn').addEventListener('click', () => document.getElementById('file-input').click());
+            document.getElementById('file-input').addEventListener('change', handleFileSelected);
+            document.getElementById('mic-btn').addEventListener('click', startVoiceRecognition);
+            document.getElementById('send-btn').addEventListener('click', sendMessage);
+
+            document.getElementById('chat-input').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            document.getElementById('backup-chats-btn').addEventListener('click', exportAllChatsJSON);
+            document.getElementById('delete-all-history-btn').addEventListener('click', deleteAllHistory);
+            document.getElementById('history-search').addEventListener('input', (e) => renderHistoryList(e.target.value));
+            document.getElementById('persona-select').addEventListener('change', (e) => changePersona(e.target.value));
+            document.getElementById('setting-provider').addEventListener('change', (e) => onProviderChange(e.target.value));
+            document.getElementById('setting-temp').addEventListener('input', (e) => document.getElementById('temp-val').innerText = e.target.value);
+
+            const cc = document.getElementById('chat-container');
+            const sbb = document.getElementById('scroll-bottom-btn');
+            cc.addEventListener('scroll', () => sbb.classList.toggle('hidden', cc.scrollHeight - cc.scrollTop - cc.clientHeight < 200), { passive: true });
+            sbb.addEventListener('click', () => cc.scrollTo({ top: cc.scrollHeight, behavior: 'smooth' }));
+            document.getElementById('chat-container').addEventListener('click', (e) => {
+                const card = e.target.closest('.quick-prompt-card');
+                if (card) sendQuickPrompt(card.getAttribute('data-prompt'));
+            });
+        }
+
+        // Quantum Particle Matrix Background Animation
+        function initParticlesCanvas() {
+            const canvas = document.getElementById('canvas-particles');
+            if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const ctx = canvas.getContext('2d');
+            const COUNT = matchMedia('(pointer: coarse)').matches ? 22 : 36;
+            const LINK2 = 100 * 100;
+            let W, H, last = 0, raf = 0;
+            const resize = () => { W = canvas.width = innerWidth; H = canvas.height = innerHeight; };
+            resize();
+            addEventListener('resize', resize, { passive: true });
+            const P = Array.from({ length: COUNT }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4, r: Math.random() * 1.4 + 0.6 }));
+
+            function frame(t) {
+                raf = requestAnimationFrame(frame);
+                if (t - last < 33) return;
+                last = t;
+                ctx.clearRect(0, 0, W, H);
+                ctx.fillStyle = 'rgba(239,68,68,0.6)';
+                ctx.beginPath();
+                for (const p of P) {
+                    p.x += p.vx; p.y += p.vy;
+                    if (p.x < 0 || p.x > W) p.vx *= -1;
+                    if (p.y < 0 || p.y > H) p.vy *= -1;
+                    ctx.moveTo(p.x + p.r, p.y);
+                    ctx.arc(p.x, p.y, p.r, 0, 6.2832);
+                }
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(239,68,68,0.12)';
+                ctx.lineWidth = 0.6;
+                ctx.beginPath();
+                for (let i = 0; i < P.length; i++) {
+                    for (let j = i + 1; j < P.length; j++) {
+                        const dx = P[i].x - P[j].x, dy = P[i].y - P[j].y;
+                        if (dx * dx + dy * dy < LINK2) { ctx.moveTo(P[i].x, P[i].y); ctx.lineTo(P[j].x, P[j].y); }
+                    }
+                }
+                ctx.stroke();
+            }
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) cancelAnimationFrame(raf); else raf = requestAnimationFrame(frame);
+            });
+            raf = requestAnimationFrame(frame);
+        }
+
+        function initRotatingPlaceholder() {
+            const tips = ['Ketik pesan...', 'Tanya apa saja...', 'Minta dibuatkan skrip...', 'Jelaskan konsep rumit...', 'Bantu tulis kode...'];
+            const input = document.getElementById('chat-input');
+            let i = 0;
+            setInterval(() => { if (document.activeElement !== input && !input.value) { i = (i + 1) % tips.length; input.placeholder = tips[i]; } }, 3500);
+        }
+
+        function initSplash() {
+            const sp = document.getElementById('splash');
+            if (!sp) return;
+            const pts = [[0, 0], [1800, 72], [3100, 85], [3700, 100]];
+            const pctAt = (t) => {
+                for (let i = 1; i < pts.length; i++) {
+                    if (t <= pts[i][0]) {
+                        const [t0, p0] = pts[i - 1], [t1, p1] = pts[i];
+                        return p0 + (p1 - p0) * (t - t0) / (t1 - t0);
+                    }
+                }
+                return 100;
+            };
+            const t0 = performance.now();
+            const txt = document.getElementById('sp-text'), pct = document.getElementById('sp-pct'), fill = sp.querySelector('.sp-fill');
+            const close = () => { sp.classList.add('hide'); setTimeout(() => sp.remove(), 1000); };
+            const timer = setInterval(() => {
+                const p = pctAt(performance.now() - t0);
+                fill.style.width = p + '%';
+                pct.textContent = Math.round(p) + '%';
+                txt.textContent = p < 35 ? 'Menginisialisasi inti...' : p < 75 ? 'Memuat matriks partikel...' : p <= 85 ? 'Menyiapkan sesi...' : 'Sistem siap';
+                if (p >= 100) { clearInterval(timer); setTimeout(close, 200); }
+            }, 35);
+            sp.addEventListener('click', () => { clearInterval(timer); close(); });
+        }
+
+        function closeSidebarMobile() {
+            const sb = document.getElementById('sidebar');
+            if (window.innerWidth < 768 && !sb.classList.contains('-translate-x-full')) toggleSidebar();
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('-translate-x-full');
+            document.getElementById('sidebar-backdrop').classList.toggle('hidden');
+        }
+
+        function openSettingsModal() {
+            document.getElementById('setting-provider').value = appState.provider;
+            onProviderChange(appState.provider);
+            document.getElementById('setting-model').value = appState.model;
+            document.getElementById('setting-apikey').value = appState.apiKey || '';
+            document.getElementById('setting-system-prompt').value = appState.systemPrompt;
+            document.getElementById('setting-temp').value = appState.temperature;
+            document.getElementById('temp-val').innerText = appState.temperature;
+            document.getElementById('setting-maxtokens').value = appState.maxTokens;
+            document.getElementById('settings-modal').classList.remove('hidden');
+        }
+
+        function closeSettingsModal() {
+            document.getElementById('settings-modal').classList.add('hidden');
+        }
+
+        function onProviderChange(provider) {
+            const modelSelect = document.getElementById('setting-model');
+            modelSelect.innerHTML = '';
+            (MODEL_OPTIONS[provider] || []).forEach(m => {
+                const opt = document.createElement('option');
+                opt.value = m.id;
+                opt.innerText = m.name;
+                modelSelect.appendChild(opt);
+            });
+            document.getElementById('api-key-label').innerText = `API Key ${provider.toUpperCase()}`;
+        }
+
+        function saveSettings() {
+            appState.provider = document.getElementById('setting-provider').value;
+            appState.model = document.getElementById('setting-model').value;
+            appState.apiKey = document.getElementById('setting-apikey').value.trim();
+            appState.systemPrompt = document.getElementById('setting-system-prompt').value;
+            appState.temperature = parseFloat(document.getElementById('setting-temp').value);
+            appState.maxTokens = parseInt(document.getElementById('setting-maxtokens').value);
+
+            localStorage.setItem('darkgpt_ultra_settings', JSON.stringify(appState));
+            closeSettingsModal();
+            updateTopDisplay();
+            showNotification('Konfigurasi Ultra berhasil disimpan!');
+        }
+
+        function loadSettingsFromStorage() {
+            const saved = localStorage.getItem('darkgpt_ultra_settings');
+            if (saved) {
+                try { appState = { ...appState, ...JSON.parse(saved) }; } catch(e) {}
+            }
+            updateTopDisplay();
+        }
+
+        function updateTopDisplay() {
+            document.getElementById('active-model-display').innerText = `${appState.provider.toUpperCase()}: ${appState.model}`;
+        }
+
+        function updateModelDropdown() {
+            const models = MODEL_OPTIONS[appState.provider] || [];
+            const modelSelect = document.getElementById('setting-model');
+            if(modelSelect) {
+                modelSelect.innerHTML = '';
+                models.forEach(m => {
+                    const opt = document.createElement('option');
+                    opt.value = m.id;
+                    opt.innerText = m.name;
+                    if(m.id === appState.model) opt.selected = true;
+                    modelSelect.appendChild(opt);
+                });
+            }
+        }
+
+        function changePersona(val) {
+            appState.persona = val;
+            if(PERSONA_PROMPTS[val]) {
+                appState.systemPrompt = PERSONA_PROMPTS[val];
+                document.getElementById('setting-system-prompt').value = appState.systemPrompt;
+                localStorage.setItem('darkgpt_ultra_settings', JSON.stringify(appState));
+                showNotification(`Mode Persona diubah ke: ${val.toUpperCase()}`);
+            }
+        }
+
+        function handleFileSelected(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                currentAttachment = { name: file.name, type: file.type, data: e.target.result };
+                renderAttachmentPreview();
+            };
+            if (file.type.startsWith('image/')) reader.readAsDataURL(file);
+            else reader.readAsText(file);
+        }
+
+        function renderAttachmentPreview() {
+            const container = document.getElementById('attachment-preview-container');
+            if (!currentAttachment) {
+                container.classList.add('hidden');
+                container.innerHTML = '';
+                return;
+            }
+            container.classList.remove('hidden');
+            let preview = currentAttachment.type.startsWith('image/') 
+                ? `<img src="${currentAttachment.data}" class="w-12 h-12 object-cover rounded-xl border border-red-800">`
+                : `<div class="w-12 h-12 rounded-xl bg-red-950 flex items-center justify-center text-red-400 border border-red-800"><i class="fa-solid fa-file-lines text-lg"></i></div>`;
+
+            container.innerHTML = `
+                <div class="flex items-center space-x-3 bg-red-950/40 border border-red-900/60 p-2.5 rounded-2xl w-full shadow-lg animate-fadeIn">
+                    ${preview}
+                    <div class="flex-1 overflow-hidden">
+                        <p class="text-xs font-semibold text-red-200 truncate">${currentAttachment.name}</p>
+                        <p class="text-[10px] text-red-400 font-mono">Berkas terlampir</p>
+                    </div>
+                    <button id="remove-attachment-btn" class="p-1.5 text-red-400 hover:text-white cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            `;
+            document.getElementById('remove-attachment-btn').addEventListener('click', () => {
+                currentAttachment = null;
+                document.getElementById('file-input').value = '';
+                renderAttachmentPreview();
+            });
+        }
+
+        let activeSpeechRecognition = null;
+        function startVoiceRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const micBtn = document.getElementById('mic-btn');
+            const input = document.getElementById('chat-input');
+            if (!SpeechRecognition) { showNotification('Fitur suara tidak didukung browser ini.'); return; }
+
+            if (activeSpeechRecognition) {
+                try { activeSpeechRecognition.stop(); } catch(e) {}
+                activeSpeechRecognition = null;
+                micBtn.classList.remove('text-red-500', 'animate-pulse');
+                return;
+            }
+
+            const recognition = new SpeechRecognition();
+            activeSpeechRecognition = recognition;
+            recognition.lang = 'id-ID';
+            recognition.onresult = (event) => {
+                const text = event.results?.[0]?.[0]?.transcript?.trim();
+                if (text) {
+                    input.value += (input.value ? ' ' : '') + text;
+                    input.dispatchEvent(new Event('input', { bubbles: true }));
+                    input.focus();
+                }
+            };
+            recognition.onend = () => {
+                micBtn.classList.remove('text-red-500', 'animate-pulse');
+                activeSpeechRecognition = null;
+            };
+            micBtn.classList.add('text-red-500', 'animate-pulse');
+            recognition.start();
+        }
+
+        function speakText(text) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'id-ID';
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function loadChatHistoryFromStorage() {
+            const saved = localStorage.getItem('darkgpt_ultra_history');
+            if (saved) { try { chatHistory = JSON.parse(saved); } catch(e) { chatHistory = []; } }
+            renderHistoryList();
+        }
+
+        function saveChatHistoryToStorage() {
+            localStorage.setItem('darkgpt_ultra_history', JSON.stringify(chatHistory));
+            renderHistoryList();
+        }
+
+        function renderHistoryList(filter = '') {
+            const listEl = document.getElementById('history-list');
+            listEl.innerHTML = '';
+            const filtered = chatHistory.filter(c => c.title.toLowerCase().includes(filter.toLowerCase()));
+            if (filtered.length === 0) {
+                listEl.innerHTML = `<p class="text-xs text-red-700/80 text-center py-4 font-mono">Belum ada riwayat.</p>`;
+                return;
+            }
+            filtered.forEach(chat => {
+                const isActive = chat.id === currentChatId;
+                const div = document.createElement('div');
+                div.className = `flex items-center justify-between p-3 rounded-2xl cursor-pointer transition text-xs group ${isActive ? 'bg-red-950/70 border border-red-600 text-white shadow-[0_0_20px_rgba(239,68,68,0.3)]' : 'hover:bg-red-950/30 text-red-300 border border-transparent'}`;
+                div.innerHTML = `
+                    <div class="flex items-center space-x-2.5 truncate flex-1 mr-2">
+                        <i class="fa-solid fa-message text-red-500 text-xs"></i>
+                        <span class="truncate font-medium">${escapeHtml(chat.title)}</span>
+                    </div>
+                    <button class="delete-chat-item opacity-0 group-hover:opacity-100 text-red-400 hover:text-red-200 transition p-1 cursor-pointer" data-id="${chat.id}">
+                        <i class="fa-solid fa-trash-can text-xs"></i>
+                    </button>
+                `;
+                div.addEventListener('click', () => loadChat(chat.id));
+                div.querySelector('.delete-chat-item').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    deleteChat(chat.id);
+                });
+                listEl.appendChild(div);
+            });
+        }
+
+        function createNewChat() {
+            const newChat = { id: 'chat_' + Date.now(), title: 'Percakapan Baru', messages: [] };
+            chatHistory.unshift(newChat);
+            currentChatId = newChat.id;
+            messages = [];
+            saveChatHistoryToStorage();
+            renderCurrentChat();
+            closeSidebarMobile();
+        }
+
+        function loadChat(id) {
+            const chat = chatHistory.find(c => c.id === id);
+            if (chat) {
+                currentChatId = chat.id;
+                messages = [...chat.messages];
+                renderCurrentChat();
+                closeSidebarMobile();
+            }
+        }
+
+        function deleteChat(id) {
+            chatHistory = chatHistory.filter(c => c.id !== id);
+            saveChatHistoryToStorage();
+            if (currentChatId === id) {
+                if (chatHistory.length > 0) loadChat(chatHistory[0].id);
+                else createNewChat();
+            }
+        }
+
+        function deleteAllHistory() {
+            if (confirm('Hapus seluruh riwayat chat Ultra?')) {
+                chatHistory = [];
+                saveChatHistoryToStorage();
+                createNewChat();
+            }
+        }
+
+        function renderCurrentChat() {
+            const container = document.getElementById('chat-container');
+            const welcomeBanner = document.getElementById('welcome-banner');
+            if (messages.length === 0) {
+                container.innerHTML = WELCOME_HTML;
+                return;
+            }
+            if (welcomeBanner) welcomeBanner.remove();
+
+            let html = '';
+            messages.forEach((msg, idx) => {
+                const isUser = msg.role === 'user';
+                const avatar = isUser ? '<i class="fa-solid fa-user"></i>' : '<i class="fa-solid fa-brain"></i>';
+                const bgClass = isUser ? 'bg-gradient-to-br from-red-900/40 to-red-950/30 border-red-800/60 ml-auto' : 'bg-black/92 border-red-950/90 border-l-2 border-l-red-500 mr-auto';
+                
+                let attachmentHtml = '';
+                if (msg.attachment) {
+                    attachmentHtml = msg.attachment.type.startsWith('image/')
+                        ? `<img src="${msg.attachment.data}" class="max-w-xs rounded-xl mb-3 border border-red-800 shadow-md">`
+                        : `<div class="p-3 bg-red-950/50 border border-red-800 rounded-xl mb-3 text-xs text-red-200"><i class="fa-solid fa-file-lines text-red-400 mr-2"></i>${msg.attachment.name}</div>`;
+                }
+
+                html += `
+                    <div class="flex items-start space-x-2 md:space-x-3 max-w-3xl w-full mx-auto chat-message ${idx === messages.length - 1 ? 'animate-fadeIn' : ''} ${isUser ? 'flex-row-reverse space-x-reverse' : ''}">
+                        <div class="w-8 h-8 md:w-9 md:h-9 rounded-2xl flex-shrink-0 flex items-center justify-center text-xs ${isUser ? 'bg-red-700 text-white shadow-lg' : 'bg-gradient-to-br from-red-600 to-red-950 text-white red-glow'}">
+                            ${avatar}
+                        </div>
+                        <div class="${isUser ? 'max-w-[85%]' : 'flex-1'} min-w-0 cyber-glass rounded-3xl p-3.5 md:p-5 border text-[13px] md:text-sm text-red-100 ${bgClass} shadow-2xl">
+                            ${attachmentHtml}
+                            <div class="markdown-content">${fmtCached(msg.content)}</div>
+                            ${isUser && msg.ts ? '<div class="mt-1.5 text-[10px] text-red-400/50 font-mono text-right">' + fmtTime(msg.ts) + '</div>' : ''}
+                            ${!isUser ? `
+                                <div class="mt-4 pt-3 border-t border-red-950/80 flex items-center justify-end space-x-4 text-xs text-red-400 font-mono">
+                                    <span class="mr-auto text-[10px] text-red-500/50">${fmtTime(msg.ts)}</span>${idx === messages.length - 1 ? '<button class="msg-regen-btn hover:text-white transition cursor-pointer"><i class="fa-solid fa-rotate text-red-500 mr-1"></i>Ulangi</button>' : ''}
+                                    <button class="msg-listen-btn hover:text-white transition cursor-pointer" data-text="${escapeAttr(msg.content)}"><i class="fa-solid fa-volume-high text-red-500 mr-1"></i>Suara</button>
+                                    <button class="msg-copy-btn hover:text-white transition cursor-pointer" data-text="${escapeAttr(msg.content)}"><i class="fa-solid fa-copy text-red-500 mr-1"></i>Salin</button>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            container.scrollTop = container.scrollHeight;
+
+            container.querySelectorAll('.msg-regen-btn').forEach(btn => btn.addEventListener('click', regenerate));
+            container.querySelectorAll('.msg-listen-btn').forEach(btn => btn.addEventListener('click', () => speakText(btn.getAttribute('data-text'))));
+            container.querySelectorAll('.msg-copy-btn').forEach(btn => btn.addEventListener('click', () => copyToClipboard(btn.getAttribute('data-text'))));
+            container.querySelectorAll('.copy-code-btn').forEach(btn => btn.addEventListener('click', () => copyToClipboard(btn.getAttribute('data-code'))));
+            container.querySelectorAll('.download-code-btn').forEach(btn => btn.addEventListener('click', () => downloadCodeFile(btn.getAttribute('data-code'), btn.getAttribute('data-lang'))));
+        }
+
+        const fmtCache = new Map();
+        function fmtCached(t) {
+            let v = fmtCache.get(t);
+            if (v === undefined) {
+                v = formatMessageContent(t);
+                fmtCache.set(t, v);
+                if (fmtCache.size > 200) fmtCache.delete(fmtCache.keys().next().value);
+            }
+            return v;
+        }
+
+        function formatMessageContent(text) {
+            if (!text) return '';
+            const blocks = [];
+            let f = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            f = f.replace(/```([a-zA-Z0-9]*)\n([\s\S]*?)```/g, (m, lang, code) => {
+                blocks.push(`<div class="code-block"><div class="code-head"><span>${lang || 'kode'}</span><div class="flex space-x-2"><button class="copy-code-btn" data-code="${escapeAttr(code)}"><i class="fa-solid fa-copy mr-1"></i>Salin</button><button class="download-code-btn" data-code="${escapeAttr(code)}" data-lang="${lang}"><i class="fa-solid fa-download mr-1"></i>Unduh</button></div></div><pre><code>${code}</code></pre></div>`);
+                return `@@CODE${blocks.length - 1}@@`;
+            });
+            f = f.replace(/`([^`\n]+)`/g, '<code class="inline-code">$1</code>');
+            f = f.replace(/^\s*[-*] (.+)$/gm, '<div class="md-li"><span>•</span><span>$1</span></div>');
+            f = f.replace(/^\s*(\d+)\. (.+)$/gm, '<div class="md-li"><span>$1.</span><span>$2</span></div>');
+            f = f.replace(/^#{1,2} (.+)$/gm, '<h3 class="md-h text-base">$1</h3>').replace(/^### (.+)$/gm, '<h4 class="md-h">$1</h4>');
+            f = f.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>');
+            f = f.replace(/\n/g, '<br>');
+            f = f.replace(/(<\/(?:h3|h4|div)>)<br>/g, '$1');
+            f = f.replace(/(?:<br>)?@@CODE(\d+)@@(?:<br>)?/g, (m, i) => blocks[i]);
+            return f;
+        }
+
+        function escapeHtml(str) { return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"); }
+        function escapeAttr(str) { return str.replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+
+        function copyToClipboard(text) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            ta.remove();
+            showNotification('Berhasil disalin ke klipboard!');
+        }
+
+        function downloadCodeFile(code, language) {
+            const extMap = { html: 'html', css: 'css', js: 'js', py: 'py', lua: 'lua', json: 'json', txt: 'txt' };
+            const ext = extMap[String(language).toLowerCase()] || 'txt';
+            const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `DarkGPT_Ultra_${Date.now()}.${ext}`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            showNotification(`Berhasil mengunduh berkas .${ext}!`);
+        }
+
+        function showNotification(msg) {
+            const div = document.createElement('div');
+            div.className = 'fixed bottom-5 right-5 z-50 cyber-glass bg-red-950/95 border border-red-600 text-white px-5 py-3.5 rounded-2xl shadow-2xl text-xs flex items-center space-x-2.5 animate-fadeIn font-mono font-bold';
+            div.innerHTML = `<i class="fa-solid fa-bell text-red-400 text-sm"></i><span>${msg}</span>`;
+            document.body.appendChild(div);
+            setTimeout(() => div.remove(), 3000);
+        }
+
+        async function sendMessage() {
+            if (sending) return;
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if (!text && !currentAttachment) return;
+            if (!appState.apiKey) { openSettingsModal(); showNotification('Masukkan API Key Anda terlebih dahulu!'); return; }
+
+            const userMsg = { role: 'user', content: text, attachment: currentAttachment, ts: Date.now() };
+            messages.push(userMsg);
+            input.value = '';
+            input.style.height = 'auto';
+            currentAttachment = null;
+            renderAttachmentPreview();
+
+            const currentChat = chatHistory.find(c => c.id === currentChatId);
+            if (currentChat && currentChat.messages.length === 0) {
+                currentChat.title = text.length > 30 ? text.substring(0, 30) + '...' : text;
+            }
+            currentChat.messages = [...messages];
+            saveChatHistoryToStorage();
+            renderCurrentChat();
+
+            sending = true;
+            document.getElementById('typing-indicator').classList.remove('hidden');
+            const startTime = performance.now();
+
+            try {
+                let aiResponseText = '';
+                if (appState.provider === 'groq') aiResponseText = await callGroqAPI();
+                else if (appState.provider === 'gemini') aiResponseText = await callGeminiAPI();
+                else if (appState.provider === 'mistral') aiResponseText = await callMistralAPI();
+                else if (appState.provider === 'openrouter') aiResponseText = await callOpenRouterAPI();
+
+                const latency = Math.round(performance.now() - startTime);
+                document.getElementById('latency-display').innerHTML = `<i class="fa-solid fa-bolt mr-1 text-red-500"></i> Latency: ${latency}ms`;
+                document.getElementById('token-counter').innerHTML = `<i class="fa-solid fa-coins mr-1 text-red-500"></i> Tokens: ~${Math.round((text.length + aiResponseText.length)/4)}`;
+
+                messages.push({ role: 'assistant', content: aiResponseText, ts: Date.now() });
+                currentChat.messages = [...messages];
+                saveChatHistoryToStorage();
+                document.getElementById('typing-indicator').classList.add('hidden');
+                renderCurrentChat();
+                await typewriter(aiResponseText);
+            } catch (error) {
+                messages.push({ role: 'assistant', content: `[ERROR] Gagal terhubung ke API: ${error.message}` });
+            } finally {
+                sending = false;
+                document.getElementById('typing-indicator').classList.add('hidden');
+                renderCurrentChat();
+            }
+        }
+
+        function apiMessages() {
+            return messages.map(m => {
+                let c = m.content || '';
+                if (m.attachment && !m.attachment.type.startsWith('image/')) c += `\n\n[Berkas: ${m.attachment.name}]\n${m.attachment.data}`;
+                return { role: m.role, content: c };
+            });
+        }
+
+        async function callGroqAPI() {
+            const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${appState.apiKey}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ model: appState.model, messages: [{ role: 'system', content: appState.systemPrompt }, ...apiMessages()], temperature: appState.temperature, max_tokens: appState.maxTokens })
+            });
+            const data = await res.json();
+            if (data.error) throw new Error(data.error.message);
+            return data.choices[0].message.content;
+        }
+
+        async function callGeminiAPI() {
+            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${appState.model}:generateContent?key=${appState.apiKey}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: apiMessages().map(m => ({ role: m.role === 'user' ? 'user' : 'model', parts: [{ text: m.content }] })), systemInstruction: { parts: [{ text: appState.systemPrompt }] } })
+            });
+            const data = await res.json();
+            if (data.error) throw new Error(data.error.message);
+            return data.candidates[0].content.parts[0].text;
+        }
+
+        async function callMistralAPI() {
+            const res = await fetch('https://api.mistral.ai/v1/chat/completions', {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${appState.apiKey}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ model: appState.model, messages: [{ role: 'system', content: appState.systemPrompt }, ...apiMessages()], temperature: appState.temperature })
+            });
+            const data = await res.json();
+            if (data.error) throw new Error(data.error.message);
+            return data.choices[0].message.content;
+        }
+
+        async function callOpenRouterAPI() {
+            const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${appState.apiKey}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ model: appState.model, messages: [{ role: 'system', content: appState.systemPrompt }, ...apiMessages()], temperature: appState.temperature })
+            });
+            const data = await res.json();
+            if (data.error) throw new Error(data.error.message);
+            return data.choices[0].message.content;
+        }
+
+        function fmtTime(ts) {
+            return ts ? new Date(ts).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) : '';
+        }
+
+        async function typewriter(fullText) {
+            const els = document.querySelectorAll('#chat-container .markdown-content');
+            const el = els[els.length - 1];
+            if (!el) return;
+            const box = document.getElementById('chat-container');
+            const frames = Math.min(40, Math.ceil(fullText.length / 25));
+            const step = Math.ceil(fullText.length / frames);
+            for (let i = step; i < fullText.length && !document.hidden; i += step) {
+                el.innerHTML = formatMessageContent(fullText.slice(0, i)) + '<span class="tw-cursor"></span>';
+                box.scrollTop = box.scrollHeight;
+                await new Promise(requestAnimationFrame);
+            }
+            el.innerHTML = fmtCached(fullText);
+        }
+
+        async function regenerate() {
+            if (sending || !messages.length || messages[messages.length - 1].role !== 'assistant') return;
+            messages.pop();
+            const last = messages.pop();
+            if (!last) return;
+            document.getElementById('chat-input').value = last.content;
+            currentAttachment = last.attachment || null;
+            renderAttachmentPreview();
+            await sendMessage();
+        }
+
+        function sendQuickPrompt(text) {
+            document.getElementById('chat-input').value = text;
+            sendMessage();
+        }
+
+        function initViewportFix() {
+            const vv = window.visualViewport;
+            function sync() {
+                const h = Math.round(vv ? vv.height : window.innerHeight);
+                document.documentElement.style.setProperty('--app-height', h + 'px');
+                document.body.style.height = h + 'px';
+                if (window.scrollY !== 0) window.scrollTo(0, 0);
+            }
+            if (vv) { vv.addEventListener('resize', sync); vv.addEventListener('scroll', sync); }
+            window.addEventListener('resize', sync);
+            sync();
+        }
+
+        function exportAllChatsJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(chatHistory, null, 2));
+            const dl = document.createElement('a');
+            dl.setAttribute("href", dataStr);
+            dl.setAttribute("download", `DarkGPT_Ultra_Backup_${Date.now()}.json`);
+            document.getElementById('chat-container').appendChild(dl);
+            dl.click();
+            dl.remove();
+            showNotification('Arsip berhasil diekspor!');
+        }
+    </script>
+</body>
+</html>
